@@ -10,7 +10,7 @@ let favoriteList = []; //variable global declarada con let para irla reasignando
 //5. FUNCIÓN PARA AÑADIR PALETAS A FAVORITAS:
 
 function handleFavoritePalettes(event) {
-  // console.log(event.currentTarget); //será cada paleta
+  console.log(event.currentTarget); //será cada paleta
   //console.log(event.target); será cada cuadradito de color
   //en el array total de paletas, encuentra la paleta que tenga == id que el id del currentTarget:
 
@@ -49,7 +49,7 @@ function renderPalettes(palettes, container) {
   container.innerHTML = content;
 
   //escuchamos los eventos cuando ya se hayan pintado las paletas en el html, por eso metemos los eventos en la función de pintar paletas
-  const containers = document.querySelectorAll('.js-container__palette'); //array de nodos de los 5 contendedores con los 5 colorcitos de cada paleta
+  const containers = document.querySelectorAll('.js-container__palette'); //recorremos el array de nodos de los 5 contendedores con los 5 colorcitos de cada paleta
   for (const container of containers) {
     container.addEventListener('click', handleFavoritePalettes);
   }
@@ -65,6 +65,7 @@ function getDataApiAndPaint() {
   )
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       errorMesagge.innerHTML = ''; //ponemos a vacío el posible mensaje de error
       palettesList = data.palettes; //guardamos en la variable global el array de objetos (id, nombre, from y colors)
       renderPalettes(palettesList, containerPalette); //función pintar paletas (argumentos: datos del fetch y contenedor normal)
@@ -89,7 +90,7 @@ if (palettesSaved !== null) {
   getDataApiAndPaint(); //llamamos a la función del fetch, en la cual ya hay una llamada a la función pintar paletas
 }
 
-// 4. FUNCIÓN PARA FILTRAR PALETAS:
+// 4. FUNCIÓN PARA FILTRAR PALETAS
 //tomamos el valor del input, hacemos un filter que nos haga coincidir letras MAY y MIN y llamamos a
 //pintar paletas con las paletas ya filtradas y el contenedor donde queremos pintarlas como argumentos.
 
