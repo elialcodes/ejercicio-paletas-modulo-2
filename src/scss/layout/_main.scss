@@ -45,6 +45,7 @@ h3 {
 }
 
 .container__palette {
+  padding: 5px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -67,4 +68,8 @@ h3 {
 
 .p__favorite {
   font-size: 13px;
+}
+
+.favorite__palette {
+  color: darkred;
 }

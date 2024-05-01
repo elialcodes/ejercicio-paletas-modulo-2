@@ -10,29 +10,25 @@ let favoriteList = []; //variable global declarada con let para irla reasignando
 //5. FUNCIÓN PARA AÑADIR PALETAS A FAVORITAS:
 
 function handleFavoritePalettes(event) {
-  console.log(event.currentTarget); //será cada paleta
-  //console.log(event.target); será cada cuadradito de color
-  //en el array total de paletas, encuentra la paleta que tenga == id que el id del currentTarget:
-
   //primero detectamos la paleta seleccionada buscando que el id de la currentTarget coincida con el id de alguna paleta:
   const paletteSelected = palettesList.find((palette) => event.currentTarget.id === palette.id);
 
-  //en la futura lista de favoritas, buscamos si el índice de la currentTarget coincide con el id de alguna paleta ya añadida a favoritas
-  //si devuelve -1, es porque no coincide y en este caso, añadimos la paleta seleccionada al array de favoritas:
+  //en la lista de favoritas, buscamos si el índice de la currentTarget coincide con el id de alguna paleta:
   const indexFavoritePalettes = favoriteList.findIndex((favoriteItem) => {
     return event.currentTarget.id === favoriteItem.id;
   });
 
   if (indexFavoritePalettes === -1) {
     favoriteList.push(paletteSelected);
+    event.currentTarget.classList.add('favorite__palette');
   }
   renderPalettes(favoriteList, containerFavorite); //pintamos las paletas favoritas en el contenedor de favoritas
 }
 
 // 3. FUNCIÓN PARA PINTAR PALETAS con:
-//argumento 1: el listado de paletas (pueden ser el del fetch o el del localStorage)
+//argumento 1: el listado de paletas (el del fetch o el de localStorage)
 //argumento 2: el contenedor donde pintarlas (puede ser el contenedor normal o el de favoritas)
-//con 2 bucles anidados: el primero itera para pintar los 5 nombres (h3) de las paletas
+//2 bucles anidados: el primero itera para pintar los 5 nombres (h3) de las paletas
 //y el segundo itera dentro para pintar los 5 colores en las 5 paletas.
 //Tras haber creado el contenido, del tirón lo pintamos con innerHTML.
 
@@ -40,7 +36,7 @@ function renderPalettes(palettes, container) {
   let content = ''; //variable que se que va reasigando en cada iteración y va aumentando el contenido
 
   for (const palette of palettes) {
-    content += `<div class="container__palette js-container__palette" id="${palette.id}"><h3>${palette.name}</h3><div class="container__palette--colors" >`;
+    content += `<div class="container__palette js-container__palette"  id="${palette.id}"><h3>${palette.name}</h3><div class="container__palette--colors">`;
     for (const color of palette.colors) {
       content += `<div class="color" style="background-color:#${color}"></div>`;
     }
@@ -49,7 +45,7 @@ function renderPalettes(palettes, container) {
   container.innerHTML = content;
 
   //escuchamos los eventos cuando ya se hayan pintado las paletas en el html, por eso metemos los eventos en la función de pintar paletas
-  const containers = document.querySelectorAll('.js-container__palette'); //recorremos el array de nodos de los 5 contendedores con los 5 colorcitos de cada paleta
+  const containers = document.querySelectorAll('.js-container__palette'); //recorremos el array de paletas
   for (const container of containers) {
     container.addEventListener('click', handleFavoritePalettes);
   }
@@ -57,7 +53,7 @@ function renderPalettes(palettes, container) {
 }
 
 // 2. FUNCIÓN PARA PEDIR DATOS AL SERVIDOR para tener paletas la primera vez que abrimos la página
-//y que los guarda en localStore pasandolos a string:
+//y que después los guarda en localStore pasandolos a string:
 
 function getDataApiAndPaint() {
   fetch(
@@ -65,7 +61,6 @@ function getDataApiAndPaint() {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       errorMesagge.innerHTML = ''; //ponemos a vacío el posible mensaje de error
       palettesList = data.palettes; //guardamos en la variable global el array de objetos (id, nombre, from y colors)
       renderPalettes(palettesList, containerPalette); //función pintar paletas (argumentos: datos del fetch y contenedor normal)
@@ -76,7 +71,8 @@ function getDataApiAndPaint() {
       errorMesagge.innerHTML = 'ERROR: Lo sentimos, ha habido un error';
     });
 }
-//constante para guardar los datos de localStorage y los parseamos a JSON.
+
+//constante para obtener los datos de localStorage y los parseamos a JSON.
 const palettesSaved = JSON.parse(localStorage.getItem('palettes'));
 
 // 1. CONDICIONAL QUE ARRANCA TODO EL CÓDIGO: si hay datos en localStorage (palettesSaved),
