@@ -21,23 +21,13 @@ function handleAddFavoritePalettes(event) {
   if (indexFavoritePalettes === -1) {
     favoriteList.push(paletteSelected);
     event.currentTarget.classList.add('favorite__palette');
+  } else {
+    favoriteList.splice(indexFavoritePalettes, 1);
+    event.currentTarget.classList.remove('favorite__palette');
   }
   console.log(favoriteList);
   console.log(palettesList);
-  console.log('add');
   renderPalettes(favoriteList, containerFavorite); //pintamos las paletas favoritas en el contenedor de favoritas
-}
-
-function handleRemoveFavoritePalettes(event) {
-  const paletteSelected = favoriteList.find((palette) => event.currentTarget.id === palette.id);
-  console.log(paletteSelected);
-  const indexPaletteSelected = favoriteList.findIndex((favoriteItem) => {
-    return event.currentTarget.id === favoriteItem.id;
-  });
-  console.log(indexPaletteSelected);
-  // favoriteList.splice(indexPaletteSelected, 1);
-  console.log(favoriteList);
-  console.log('remove');
 }
 
 // 3. FUNCIÓN PARA PINTAR PALETAS con:
@@ -59,13 +49,10 @@ function renderPalettes(palettes, container) {
   }
   container.innerHTML = content;
 
-  //escuchamos los eventos cuando ya se hayan pintado las paletas en el html, por eso metemos los eventos en la función de pintar paletas
+  //insertamos los eventos al pintarse las paletas en el html
   const containers = document.querySelectorAll('.js-container__palette'); //array de paletas
   for (const container of containers) {
     container.addEventListener('click', handleAddFavoritePalettes);
-  }
-  for (const container of containers) {
-    container.addEventListener('click', handleRemoveFavoritePalettes);
   }
   inputSearch.addEventListener('input', handleFilterPalettes); //evento de input
 }
