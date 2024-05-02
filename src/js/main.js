@@ -23,8 +23,6 @@ function handleFavoritePalettes(event) {
   } else {
     favoriteList.splice(indexFavoritePalettes, 1);
   }
-  console.log(favoriteList);
-  console.log(palettesList);
   renderPalettes(favoriteList, containerFavorite); //pintamos las paletas favoritas en el contenedor de favoritas
 }
 
