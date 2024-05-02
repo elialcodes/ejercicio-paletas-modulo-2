@@ -1,7 +1,7 @@
 'use strict';
 
-const containerPalette = document.querySelector('.js-container-main'); //contenedor las paletas normales
-const containerFavorite = document.querySelector('.js-container-favorite'); //contenedor para las paletas favoritas
+const containerPalette = document.querySelector('.js-container-main'); //contenedor para paletas normales
+const containerFavorite = document.querySelector('.js-container-favorite'); //contenedor para paletas favoritas
 const errorMesagge = document.querySelector('.js-message-error'); //parrafo para posible mensaje de error
 const inputSearch = document.querySelector('.js-search');
 let palettesList = []; //variable global declarada let para irla reasignando
@@ -9,8 +9,8 @@ let favoriteList = []; //variable global declarada con let para irla reasignando
 
 //5. FUNCIÓN PARA AÑADIR PALETAS A FAVORITAS:
 
-function handleFavoritePalettes(event) {
-  //primero detectamos la paleta seleccionada buscando que el id de la currentTarget coincida con el id de alguna paleta:
+function handleAddFavoritePalettes(event) {
+  //detectamos la paleta seleccionada buscando que el id de la currentTarget coincida con el id de alguna paleta:
   const paletteSelected = palettesList.find((palette) => event.currentTarget.id === palette.id);
 
   //en la lista de favoritas, buscamos si el índice de la currentTarget coincide con el id de alguna paleta:
@@ -22,7 +22,22 @@ function handleFavoritePalettes(event) {
     favoriteList.push(paletteSelected);
     event.currentTarget.classList.add('favorite__palette');
   }
+  console.log(favoriteList);
+  console.log(palettesList);
+  console.log('add');
   renderPalettes(favoriteList, containerFavorite); //pintamos las paletas favoritas en el contenedor de favoritas
+}
+
+function handleRemoveFavoritePalettes(event) {
+  const paletteSelected = favoriteList.find((palette) => event.currentTarget.id === palette.id);
+  console.log(paletteSelected);
+  const indexPaletteSelected = favoriteList.findIndex((favoriteItem) => {
+    return event.currentTarget.id === favoriteItem.id;
+  });
+  console.log(indexPaletteSelected);
+  // favoriteList.splice(indexPaletteSelected, 1);
+  console.log(favoriteList);
+  console.log('remove');
 }
 
 // 3. FUNCIÓN PARA PINTAR PALETAS con:
@@ -45,9 +60,12 @@ function renderPalettes(palettes, container) {
   container.innerHTML = content;
 
   //escuchamos los eventos cuando ya se hayan pintado las paletas en el html, por eso metemos los eventos en la función de pintar paletas
-  const containers = document.querySelectorAll('.js-container__palette'); //recorremos el array de paletas
+  const containers = document.querySelectorAll('.js-container__palette'); //array de paletas
   for (const container of containers) {
-    container.addEventListener('click', handleFavoritePalettes);
+    container.addEventListener('click', handleAddFavoritePalettes);
+  }
+  for (const container of containers) {
+    container.addEventListener('click', handleRemoveFavoritePalettes);
   }
   inputSearch.addEventListener('input', handleFilterPalettes); //evento de input
 }
@@ -78,9 +96,8 @@ const palettesSaved = JSON.parse(localStorage.getItem('palettes'));
 // 1. CONDICIONAL QUE ARRANCA TODO EL CÓDIGO: si hay datos en localStorage (palettesSaved),
 //llamamos a la función de pintar paletas con los datos del localStorage como argumento
 // y si no hay datos guardados, llamamos a la función que ejecuta fetch:
-
 if (palettesSaved !== null) {
-  palettesList = palettesSaved; //metemos las paletas guardadas de localStorage en palettesLista para tener datos con los que trabajar
+  palettesList = palettesSaved; //metemos las paletas guardadas de localStorage en palettesList para tener datos con los que trabajar
   renderPalettes(palettesList, containerPalette); //las lista de paletas y el contenedor normal serán los argumentos utilizados
 } else {
   getDataApiAndPaint(); //llamamos a la función del fetch, en la cual ya hay una llamada a la función pintar paletas

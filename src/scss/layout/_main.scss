@@ -1,15 +1,15 @@
 main {
   padding: 20px;
   display: flex;
-  gap: 10%;
+  justify-content: space-between;
   @media (min-width: 768px) {
-    padding: 50px;
+    padding: 50px 100px;
   }
 }
 
 .container__search,
 .container__favorite {
-  width: 45%;
+  width: 40%;
 }
 
 h2 {
@@ -54,6 +54,14 @@ h3 {
 .container__palette--colors {
   display: flex;
   flex-direction: row;
+  justify-content: start;
+  width: 150px;
+  @media (min-width: 768px) {
+    width: 250px;
+  }
+  &:hover {
+    box-shadow: 5px 5px 10px black;
+  }
 }
 
 .color {
