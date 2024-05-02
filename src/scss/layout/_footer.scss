@@ -1,17 +1,19 @@
 footer {
   width: 100%;
-  height: 5vh;
-  padding-right: 30px;
+  height: 7vh;
+  padding-right: 20px;
   background-color: bisque;
   position: fixed;
   bottom: 0;
   display: flex;
   justify-content: end;
   align-items: center;
+
   @media (min-width: 768px) {
     padding-right: 50px;
   }
 }
+
 span {
   font-size: 14px;
 }
