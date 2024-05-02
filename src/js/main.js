@@ -7,9 +7,9 @@ const inputSearch = document.querySelector('.js-search');
 let palettesList = []; //variable global declarada let para irla reasignando
 let favoriteList = []; //variable global declarada con let para irla reasignando
 
-//5. FUNCIÓN PARA AÑADIR PALETAS A FAVORITAS:
+//5. FUNCIÓN PARA AÑADIR/ELIMINAR PALETAS FAVORITAS:
 
-function handleAddFavoritePalettes(event) {
+function handleFavoritePalettes(event) {
   //detectamos la paleta seleccionada buscando que el id de la currentTarget coincida con el id de alguna paleta:
   const paletteSelected = palettesList.find((palette) => event.currentTarget.id === palette.id);
 
@@ -20,10 +20,8 @@ function handleAddFavoritePalettes(event) {
 
   if (indexFavoritePalettes === -1) {
     favoriteList.push(paletteSelected);
-    event.currentTarget.classList.add('favorite__palette');
   } else {
     favoriteList.splice(indexFavoritePalettes, 1);
-    event.currentTarget.classList.remove('favorite__palette');
   }
   console.log(favoriteList);
   console.log(palettesList);
@@ -52,7 +50,7 @@ function renderPalettes(palettes, container) {
   //insertamos los eventos al pintarse las paletas en el html
   const containers = document.querySelectorAll('.js-container__palette'); //array de paletas
   for (const container of containers) {
-    container.addEventListener('click', handleAddFavoritePalettes);
+    container.addEventListener('click', handleFavoritePalettes);
   }
   inputSearch.addEventListener('input', handleFilterPalettes); //evento de input
 }
