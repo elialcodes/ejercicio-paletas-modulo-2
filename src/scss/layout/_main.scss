@@ -14,19 +14,23 @@ main {
   .container__search-input {
     display: flex;
     justify-content: center;
+    align-items: flex-end;
     gap: 10px;
+    margin-bottom: 10px;
+    @media (min-width: 768px) {
+      align-items: center;
+    }
 
     & h2 {
+      // padding-top: 2px;
       font-size: 16px;
-      margin-bottom: 10px;
       @media (min-width: 768px) {
         font-size: 30px;
-        margin-bottom: 20px;
+        padding-top: 0px;
       }
     }
 
     & input {
-      margin-bottom: 30px;
       padding-left: 5px;
       width: 120px;
       height: 20px;
@@ -42,9 +46,10 @@ main {
       border-radius: 3px;
       color: lightslategray;
     }
-    :hover {
+    button:hover {
       border: 1px solid black;
       color: black;
+      box-shadow: 3px 3px 5px gray;
     }
   }
 }
