@@ -1,25 +1,51 @@
 main {
   padding: 20px 20px 0px 20px;
   @media (min-width: 768px) {
-    padding: 50px 100px;
+    padding: 50px;
+  }
+  @media (min-width: 1024px) {
+    padding: 30px 50px;
   }
 }
-
 .container__search {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  & h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    @media (min-width: 768px) {
-      font-size: 25px;
-      margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+
+  .container__search-input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    & h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      @media (min-width: 768px) {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
     }
-  }
-  & input {
-    margin-bottom: 30px;
+
+    & input {
+      margin-bottom: 30px;
+      padding-left: 5px;
+      width: 120px;
+      height: 20px;
+      font-size: 11px;
+    }
+
+    & button {
+      width: 50px;
+      height: 20px;
+      font-size: 11px;
+      background-color: lightblue;
+      border: none;
+      border-radius: 3px;
+      color: lightslategray;
+    }
+    :hover {
+      border: 1px solid black;
+      color: black;
+    }
   }
 }
 
@@ -38,7 +64,11 @@ main {
   justify-content: space-between;
   gap: 20px;
   @media (min-width: 768px) {
-    padding: 50px 100px;
+    padding: 0px 30px;
+    gap: 50px;
+  }
+  @media (min-width: 1024px) {
+    padding: 0px 100px;
     gap: 50px;
   }
 
