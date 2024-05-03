@@ -3,7 +3,9 @@
 const containerPalette = document.querySelector('.js-container-main'); //contenedor para paletas normales
 const containerFavorite = document.querySelector('.js-container-favorite'); //contenedor para paletas favoritas
 const errorMesagge = document.querySelector('.js-message-error'); //parrafo para posible mensaje de error
-const inputSearch = document.querySelector('.js-search');
+const inputSearch = document.querySelector('.js-search-input');
+const buttonSearchReset = document.querySelector('.js-search-reset-button');
+const buttonFavoriteReset = document.querySelector('.js-favorite-reset-button');
 let palettesList = []; //variable global declarada let para irla reasignando
 let favoriteList = []; //variable global declarada con let para irla reasignando
 
@@ -97,3 +99,21 @@ function handleFilterPalettes() {
   });
   renderPalettes(filteredPalettes, containerPalette);
 }
+
+// 6. FUNCIÓN PARA RESET en el input de búsqueda
+
+function handleResetSearchButton() {
+  inputSearch.value = '';
+  renderPalettes(palettesList, containerPalette);
+}
+
+buttonSearchReset.addEventListener('click', handleResetSearchButton);
+
+// 7. FUNCIÓN PARA RESET en el contenedor de favoritos
+
+function handleResetFavorites() {
+  favoriteList = [];
+  renderPalettes(favoriteList, containerFavorite);
+}
+
+buttonFavoriteReset.addEventListener('click', handleResetFavorites);
