@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>Search palettes</title>
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" /> -->
     
-    <link rel="stylesheet" href="./assets/index-54b26120.css">
+    <link rel="stylesheet" href="./assets/index-0f6a7190.css">
   </head>
   <body>
     <header>
@@ -15,16 +15,22 @@
 
     <main>
   <div class="container__search">
-    <h2>PALETTES:</h2>
-    <p class="p__search">Buscar paleta</p>
-    <input class="input__search js-search" type="text" />
-    <div class="container__main js-container-main"></div>
-    <p class="p__favorite">*Haz click para añadirlas a favoritas</p>
-    <p class="js-message-error"></p>
+    <h2>BUSCAR PALETA</h2>
+    <input class="js-search-input" type="text" />
+    <button class="js-search-reset-button">Borrar</button>
   </div>
-  <div class="container__favorite">
-    <h2>FAVORITAS*:</h2>
-    <div class="container__main js-container-favorite"></div>
+
+  <div class="container__global">
+    <div class="container__palettes">
+      <div class="container__main js-container-main"></div>
+    </div>
+    <div class="container__favorite">
+      <div class="container__favorite-title">
+        <h2>Favoritas</h2>
+        <button class="js-favorite-reset-button">Borrar todas</button>
+      </div>
+      <div class="container__main js-container-favorite"></div>
+    </div>
   </div>
 </main>
 
