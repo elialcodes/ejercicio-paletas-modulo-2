@@ -36,6 +36,12 @@ function handleFavoritePalettes(event) {
 //Tras haber creado el contenido, del tirón lo pintamos con innerHTML.
 
 function renderPalettes(palettes, container) {
+  if (!container) {
+    console.error('El contenedor no se encontró en el DOM.');
+    return;
+  }
+  // Resto del código...
+
   let content = ''; //variable que se que va reasigando en cada iteración y va aumentando el contenido
 
   for (const palette of palettes) {
@@ -64,14 +70,9 @@ function getDataApiAndPaint() {
   )
     .then((response) => response.json())
     .then((data) => {
-      errorMesagge.innerHTML = ''; //ponemos a vacío el posible mensaje de error
       palettesList = data.palettes; //guardamos en la variable global el array de objetos (id, nombre, from y colors)
       renderPalettes(palettesList, containerPalette); //función pintar paletas (argumentos: datos del fetch y contenedor normal)
       localStorage.setItem('palettes', JSON.stringify(palettesList)); //guardamos los datos recibidos del fetch
-    })
-
-    .catch(() => {
-      errorMesagge.innerHTML = 'ERROR: Lo sentimos, ha habido un error';
     });
 }
 
